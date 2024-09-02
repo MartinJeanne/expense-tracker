@@ -1,10 +1,13 @@
 {
   "name": "expense-tracker",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "bin/index.js",
   "scripts": {
-    "start": "npx tsc && node dist/index.js",
+    "build": "npx tsc",
     "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "bin": {
+    "expense-tracker": "./bin/index.js"
   },
   "keywords": [],
   "author": "",
