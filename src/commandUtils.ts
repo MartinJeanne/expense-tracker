@@ -17,12 +17,12 @@ enum CommandName {
 
 export const commandCollection: Command[] = [
     { name: CommandName.add, description: '', options: ['-d --description <description>', '-a --amount <amount>'], callback: (options) => add(options) },
-    { name: CommandName.update, description: '', options: [], callback: () => toImplement() },
-    { name: CommandName.list, description: '', options: [], callback: () => toImplement() },
-    { name: CommandName.summary, description: '', options: [], callback: () => toImplement() },
-    { name: CommandName.delete, description: '', options: [], callback: () => toImplement() },
+    { name: CommandName.update, description: '', options: [], callback: () => notImplemented() },
+    { name: CommandName.list, description: '', options: [], callback: () => notImplemented() },
+    { name: CommandName.summary, description: '', options: [], callback: () => notImplemented() },
+    { name: CommandName.delete, description: '', options: [], callback: () => notImplemented() },
 ];
 
-const toImplement = () => {
+const notImplemented = () => {
     console.warn('Not implemented');
 }

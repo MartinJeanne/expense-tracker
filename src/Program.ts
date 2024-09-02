@@ -1,5 +1,5 @@
 import { Command } from "commander";
-import { commandCollection } from "./Command";
+import { commandCollection } from "./commandUtils";
 
 export default class Program {
     private program: Command;
@@ -21,7 +21,7 @@ export default class Program {
                 .command(command.name)
                 .description(command.description)
 
-            command.options.forEach(option => currentCmd.option(option));
+            command.options.forEach(option => currentCmd.requiredOption(option));
             currentCmd.action((options) => command.callback(options));
         });
 

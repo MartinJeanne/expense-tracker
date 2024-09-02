@@ -1,4 +1,6 @@
+import Expense from "../Expense";
+
 export default (options: any) => {
-    console.log('Add command!');
-    console.log(options);
+    const newExpense = new Expense(options.description, options.amount);
+    console.log(newExpense.toString());
 }
