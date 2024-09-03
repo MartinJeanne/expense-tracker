@@ -1,7 +1,7 @@
 # expense-tracker
 
 ## Info
-Follow you expenses with this CLI!
+Follow you expenses with this CLI!  
 Project to train my back-end skills. Made with Node.js and TypeScript.  
 Roadmap project link: https://roadmap.sh/projects/expense-tracker
 
