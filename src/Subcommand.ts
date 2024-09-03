@@ -1,9 +1,9 @@
 import { Option } from "commander";
-import add from "./commands/add";
-import list from "./commands/list";
-import update from "./commands/update";
-import del from "./commands/del";
-import summary from "./commands/summary";
+import add from "./subcommands/add";
+import list from "./subcommands/list";
+import update from "./subcommands/update";
+import del from "./subcommands/del";
+import summary from "./subcommands/summary";
 
 enum SubcommandName {
     add = 'add',
