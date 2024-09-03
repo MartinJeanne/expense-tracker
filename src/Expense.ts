@@ -36,10 +36,14 @@ export default class Expense {
     }
 
     toString(): string {
-        return `${this.id}. "${this.description}": ${this.amount}`;
+        return `${this.id}. ${this.createdAt.toLocaleDateString()} "${this.description}" ${this.amount}€`;
     }
 
     toStringDetail(): string {
         return `${this.id}. "${this.description}": ${this.amount} - created: ${this.createdAt}, updated: ${this.updatedAt}`;
+    }
+
+    print() {
+        console.log(this.toString());
     }
 }
