@@ -1,6 +1,7 @@
 import { Option } from "commander";
 import add from "./commands/add";
 import list from "./commands/list";
+import update from "./commands/update";
 
 enum SubcommandName {
     add = 'add',
@@ -41,7 +42,17 @@ export default class Subcommand {
                 (options) => add(options)
             ),
 
-            new Subcommand(SubcommandName.update, '', [], (options) => notImplemented()),
+            new Subcommand(
+                SubcommandName.update,
+                'Update an expense',
+                [
+                    new Option('--id <id>').argParser(parseInt),
+                    new Option('-d --description <description>'),
+                    new Option('-a --amount <amount>').argParser(parseFloat)
+                ],
+                (options) => update(options)
+            ),
+
             new Subcommand(SubcommandName.delete, '', [], (options) => notImplemented()),
             new Subcommand(SubcommandName.list, '', [], (options) => list(options)),
             new Subcommand(SubcommandName.summary, '', [], (options) => notImplemented()),

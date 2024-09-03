@@ -4,11 +4,11 @@ import JSONParseError from './error/JSONParseError';
 import { UNDEFINED_ID } from './types';
 
 type RawExpense = {
-    id: number,
-    description: string,
-    amount: number,
-    createdAt: string,
-    updatedAt: string
+    _id: number,
+    _description: string,
+    _amount: number,
+    _createdAt: string,
+    _updatedAt: string
 }
 
 export default class ExpenseRepository {
@@ -31,20 +31,20 @@ export default class ExpenseRepository {
             throw new JSONParseError('Invalid data: the JSON file is corrupted')
         }
         const expenses = this.toExpenses(expensesRaw);
-        return expenses.sort((a, b) => a.getId() - b.getId());
+        return expenses.sort((a, b) => a.id - b.id);
     }
 
     async findById(id: number): Promise<Expense | undefined> {
         const expenses = await this.findAll();
-        return expenses.find(t => t.getId() === id);
+        return expenses.find(t => t.id === id);
     }
 
     async save(expense: Expense) {
         const expenses = await this.findAll();
-        if (expense.getId() === UNDEFINED_ID)
-            expense.setId(this.nextValidId(expenses));
+        if (expense.id === UNDEFINED_ID)
+            expense.id = this.nextValidId(expenses);
         else {
-            const toUpdate = expenses.find(t => t.getId() === expense.getId());
+            const toUpdate = expenses.find(t => t.id === expense.id);
             if (toUpdate) {
                 expenses.splice(expenses.indexOf(toUpdate), 1);
             }
@@ -55,7 +55,7 @@ export default class ExpenseRepository {
 
     async delete(expense: Expense) {
         const expenses = await this.findAll();
-        const toDelete = expenses.find(t => t.getId() === expense.getId());
+        const toDelete = expenses.find(t => t.id === expense.id);
         if (toDelete) {
             expenses.splice(expenses.indexOf(toDelete), 1);
             await this.overwriteAll(expenses);
@@ -65,8 +65,8 @@ export default class ExpenseRepository {
     private nextValidId(expenses: Expense[]): number {
         if (!expenses || expenses.length === 0) return 1;
 
-        const sortedExpenses = expenses.sort((a, b) => b.getId() - a.getId())
-        return sortedExpenses[0].getId() + 1;
+        const sortedExpenses = expenses.sort((a, b) => b.id- a.id)
+        return sortedExpenses[0].id + 1;
     }
 
     private async overwriteAll(expenses: Expense[]) {
@@ -81,11 +81,11 @@ export default class ExpenseRepository {
         const object = value as Record<string, unknown>
 
         return (
-            typeof object.id === 'number' &&
-            typeof object.description === 'string' &&
-            typeof object.amount === 'number' &&
-            typeof object.createdAt === 'string' && !isNaN(Date.parse(object.createdAt)) &&
-            typeof object.updatedAt === 'string' && !isNaN(Date.parse(object.updatedAt))
+            typeof object._id === 'number' &&
+            typeof object._description === 'string' &&
+            typeof object._amount === 'number' &&
+            typeof object._createdAt === 'string' && !isNaN(Date.parse(object._createdAt)) &&
+            typeof object._updatedAt === 'string' && !isNaN(Date.parse(object._updatedAt))
         )
     }
 
@@ -94,7 +94,7 @@ export default class ExpenseRepository {
     }
 
     private toExpense(rExpense: RawExpense): Expense {
-        return new Expense(rExpense.description, rExpense.amount, rExpense.id, new Date(rExpense.createdAt), new Date(rExpense.updatedAt));
+        return new Expense(rExpense._description, rExpense._amount, rExpense._id, new Date(rExpense._createdAt), new Date(rExpense._updatedAt));
     }
 
     private toExpenses(rExpenses: RawExpense[]): Expense[] {

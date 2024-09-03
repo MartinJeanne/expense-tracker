@@ -1,46 +1,50 @@
 import { UNDEFINED_ID } from "./types";
 
 export default class Expense {
-    private id: number;
-    private description: string;
-    private amount: number;
-    private createdAt: Date;
-    private updatedAt: Date;
+    private _id: number;
+    private _description: string;
+    private _amount: number;
+    private _createdAt: Date;
+    private _updatedAt: Date;
 
     constructor(description: string, amount: number, id?: number, createdAt?: Date, updatedAt?: Date) {
-        if (id) this.id = id; // todo better id handling?
-        else this.id = UNDEFINED_ID;
-        this.description = description;
-        this.amount = amount;
+        if (id) this._id = id; // todo better id handling?
+        else this._id = UNDEFINED_ID;
+        this._description = description;
+        this._amount = amount;
 
-        if (createdAt) this.createdAt = createdAt;
-        else this.createdAt = new Date();
-        if (updatedAt) this.updatedAt = updatedAt;
-        else this.updatedAt = new Date();
+        if (createdAt) this._createdAt = createdAt;
+        else this._createdAt = new Date();
+        if (updatedAt) this._updatedAt = updatedAt;
+        else this._updatedAt = new Date();
     }
 
-    getId() {
-        return this.id;
+    get id() {
+        return this._id;
     }
 
-    setId(id: number): void {
-        this.id = id;
+    set id(id: number) {
+        this._id = id;
     }
 
-    setDescription(description: string) {
-        this.description = description;
+    set description(description: string) {
+        this._description = description;
     }
 
-    setUpdatedAt(date: Date) {
-        this.updatedAt = date;
+    set amount(amount: number) {
+        this._amount = amount;
+    }
+
+    set updatedAt(date: Date) {
+        this._updatedAt = date;
     }
 
     toString(): string {
-        return `${this.id}. ${this.createdAt.toLocaleDateString()} "${this.description}" ${this.amount}€`;
+        return `${this._id}. ${this._createdAt.toLocaleDateString()} "${this._description}" ${this._amount}€`;
     }
 
     toStringDetail(): string {
-        return `${this.id}. "${this.description}": ${this.amount} - created: ${this.createdAt}, updated: ${this.updatedAt}`;
+        return `${this._id}. "${this._description}": ${this._amount} - created: ${this._createdAt}, updated: ${this._updatedAt}`;
     }
 
     print() {
