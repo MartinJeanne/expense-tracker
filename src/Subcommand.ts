@@ -3,6 +3,7 @@ import add from "./commands/add";
 import list from "./commands/list";
 import update from "./commands/update";
 import del from "./commands/del";
+import summary from "./commands/summary";
 
 enum SubcommandName {
     add = 'add',
@@ -55,7 +56,7 @@ export default class Subcommand {
 
             new Subcommand(SubcommandName.delete, '', [new Option('--id <id>').argParser(parseInt).makeOptionMandatory()], (options) => del(options)),
             new Subcommand(SubcommandName.list, '', [], (options) => list(options)),
-            new Subcommand(SubcommandName.summary, '', [], (options) => notImplemented()),
+            new Subcommand(SubcommandName.summary, '', [], (options) => summary(options)),
         );
 
         return Subcommand.collection;

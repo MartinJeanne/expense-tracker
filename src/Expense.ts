@@ -27,8 +27,16 @@ export default class Expense {
         this._id = id;
     }
 
+    get description() {
+        return this._description;
+    }
+
     set description(description: string) {
         this._description = description;
+    }
+
+    get amount() {
+        return this._amount;
     }
 
     set amount(amount: number) {
