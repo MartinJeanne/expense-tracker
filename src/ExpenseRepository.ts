@@ -41,7 +41,7 @@ export default class ExpenseRepository {
 
     async findByMonth(month: number): Promise<Expense[]> {
         const expenses = await this.findAll();
-        return expenses.filter(e => e.updatedAt.getMonth() === month);
+        return expenses.filter(e => e.updatedAt.getMonth() + 1 === month);
     }
 
     async save(expense: Expense) {
@@ -70,7 +70,7 @@ export default class ExpenseRepository {
     private nextValidId(expenses: Expense[]): number {
         if (!expenses || expenses.length === 0) return 1;
 
-        const sortedExpenses = expenses.sort((a, b) => b.id- a.id)
+        const sortedExpenses = expenses.sort((a, b) => b.id - a.id)
         return sortedExpenses[0].id + 1;
     }
 

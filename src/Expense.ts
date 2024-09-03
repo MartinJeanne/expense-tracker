@@ -43,6 +43,10 @@ export default class Expense {
         this._amount = amount;
     }
 
+    get updatedAt() {
+        return this._updatedAt;
+    }
+
     set updatedAt(date: Date) {
         this._updatedAt = date;
     }
