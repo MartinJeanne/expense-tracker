@@ -55,13 +55,19 @@ export default class Subcommand {
             ),
 
             new Subcommand(
-                SubcommandName.delete, 'delete an expense by id', 
-                [new Option('--id <id>').argParser(parseInt).makeOptionMandatory()], 
+                SubcommandName.delete, 'delete an expense by id',
+                [new Option('--id <id>').argParser(parseInt).makeOptionMandatory()],
                 (options) => del(options)
             ),
 
             new Subcommand(SubcommandName.list, 'list expenses', [], (options) => list(options)),
-            new Subcommand(SubcommandName.summary, 'summary of expenses', [], (options) => summary(options)),
+
+            new Subcommand(
+                SubcommandName.summary,
+                'summary of expenses',
+                [new Option('-m --month <month>').argParser(parseInt)],
+                (options) => summary(options)
+            )
         );
 
         return Subcommand.collection;
@@ -82,8 +88,4 @@ export default class Subcommand {
     get action() {
         return this._action;
     }
-}
-
-const notImplemented = () => {
-    console.warn('Not implemented');
 }

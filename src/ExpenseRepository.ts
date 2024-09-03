@@ -36,7 +36,12 @@ export default class ExpenseRepository {
 
     async findById(id: number): Promise<Expense | undefined> {
         const expenses = await this.findAll();
-        return expenses.find(t => t.id === id);
+        return expenses.find(e => e.id === id);
+    }
+
+    async findByMonth(month: number): Promise<Expense[]> {
+        const expenses = await this.findAll();
+        return expenses.filter(e => e.updatedAt.getMonth() === month);
     }
 
     async save(expense: Expense) {
