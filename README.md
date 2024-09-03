@@ -18,7 +18,7 @@ npm run build
 ```
 npm link
 ```
-You can now use the cli command wherever you want: `expense-tracker`  
+You can now use the CLI wherever you want.
 If you want to undo that:
 ```
 npm unlink --global
