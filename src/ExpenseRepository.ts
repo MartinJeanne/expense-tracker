@@ -28,7 +28,7 @@ export default class ExpenseRepository {
             });
 
         if (!this.isExpensesRaw(expensesRaw)) {
-            throw new JSONParseError('Invalid data: array of Expense expected from JSON')
+            throw new JSONParseError('Invalid data: the JSON file is corrupted')
         }
         const expenses = this.toExpenses(expensesRaw);
         return expenses.sort((a, b) => a.getId() - b.getId());

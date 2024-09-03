@@ -1,5 +1,5 @@
 import { Command } from "commander";
-import { commandCollection } from "./commandUtils";
+import Subcommand from "./Subcommand";
 
 export default class Program {
     private program: Command;
@@ -16,13 +16,13 @@ export default class Program {
     }
 
     setup() {
-        commandCollection.forEach(command => {
+        Subcommand.getCollection().forEach(subcmd => {
             const currentCmd = this.program
-                .command(command.name)
-                .description(command.description)
+                .command(subcmd.name)
+                .description(subcmd.description)
 
-            command.options.forEach(option => currentCmd.requiredOption(option));
-            currentCmd.action((options) => command.callback(options));
+            subcmd.options.forEach(option => currentCmd.addOption(option));
+            currentCmd.action((options) => subcmd.action(options));
         });
 
         this.program.parse();

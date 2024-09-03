@@ -11,6 +11,10 @@ npm i
 ```
 
 ```
+npm run build
+```
+
+```
 npm link
 ```
 You can now use the following command wherever you want: `expense-tracker`  

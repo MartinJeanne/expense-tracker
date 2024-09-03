@@ -36,10 +36,10 @@ export default class Expense {
     }
 
     toString(): string {
-        return `${this.id}. ${this.amount}: "${this.description}"`;
+        return `${this.id}. "${this.description}": ${this.amount}`;
     }
 
     toStringDetail(): string {
-        return `${this.id}. ${this.amount}: "${this.description}" - created: ${this.createdAt}, updated: ${this.updatedAt}`;
+        return `${this.id}. "${this.description}": ${this.amount} - created: ${this.createdAt}, updated: ${this.updatedAt}`;
     }
 }
