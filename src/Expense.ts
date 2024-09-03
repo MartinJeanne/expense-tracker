@@ -40,7 +40,7 @@ export default class Expense {
     }
 
     toString(): string {
-        return `${this._id}. ${this._createdAt.toLocaleDateString()} "${this._description}" ${this._amount}€`;
+        return `${this._id}. ${this._updatedAt.toLocaleDateString()} "${this._description}" ${this._amount}€`;
     }
 
     toStringDetail(): string {

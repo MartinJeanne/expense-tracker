@@ -53,9 +53,9 @@ export default class ExpenseRepository {
         await this.overwriteAll(expenses);
     }
 
-    async delete(expense: Expense) {
+    async deleteById(id: number) {
         const expenses = await this.findAll();
-        const toDelete = expenses.find(t => t.id === expense.id);
+        const toDelete = expenses.find(t => t.id === id);
         if (toDelete) {
             expenses.splice(expenses.indexOf(toDelete), 1);
             await this.overwriteAll(expenses);

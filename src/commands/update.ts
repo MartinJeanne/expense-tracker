@@ -1,9 +1,6 @@
-import Expense from "../Expense";
 import ExpenseRepository from "../ExpenseRepository";
 
 export default async (options: any) => {
-    console.log(options);
-    
     const id = options.id;
     const description = options.description;
     const amount = options.amount;
@@ -12,9 +9,10 @@ export default async (options: any) => {
 
     const expenseRepo = new ExpenseRepository();
     const expense = await expenseRepo.findById(id);
-    if (!expense) return console.warn(`Not expense found for id: ${id}`);
+    if (!expense) return console.warn(`No expense found for id: ${id}`);
 
     if (description) expense.description = description;
     if (amount) expense.amount = amount;
+    if (description || amount) expense.updatedAt = new Date();
     expenseRepo.save(expense);
 }
