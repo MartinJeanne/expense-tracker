@@ -35,7 +35,7 @@ export default class Subcommand {
         Subcommand.collection.push(
             new Subcommand(
                 SubcommandName.add,
-                'Add an expense',
+                'add an expense',
                 [
                     new Option('-d --description <description>').makeOptionMandatory(),
                     new Option('-a --amount <amount>').argParser(parseFloat).makeOptionMandatory()
@@ -45,7 +45,7 @@ export default class Subcommand {
 
             new Subcommand(
                 SubcommandName.update,
-                'Update an expense',
+                'update expense description or amount',
                 [
                     new Option('--id <id>').argParser(parseInt),
                     new Option('-d --description <description>'),
@@ -54,9 +54,14 @@ export default class Subcommand {
                 (options) => update(options)
             ),
 
-            new Subcommand(SubcommandName.delete, '', [new Option('--id <id>').argParser(parseInt).makeOptionMandatory()], (options) => del(options)),
-            new Subcommand(SubcommandName.list, '', [], (options) => list(options)),
-            new Subcommand(SubcommandName.summary, '', [], (options) => summary(options)),
+            new Subcommand(
+                SubcommandName.delete, 'delete an expense by id', 
+                [new Option('--id <id>').argParser(parseInt).makeOptionMandatory()], 
+                (options) => del(options)
+            ),
+
+            new Subcommand(SubcommandName.list, 'list expenses', [], (options) => list(options)),
+            new Subcommand(SubcommandName.summary, 'summary of expenses', [], (options) => summary(options)),
         );
 
         return Subcommand.collection;
