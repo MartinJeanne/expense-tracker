@@ -5,8 +5,9 @@ export default async (options: any) => {
     const expenseRepo = new ExpenseRepository();
 
     let expenses;
-    if (month) {
-        if (Number.isNaN(month)) return console.warn('Month value is not a valid number')
+    if (month || month === 0) {
+        if (Number.isNaN(month)) return console.warn('Month value is not a valid number');
+        else if (month > 12 || month < 1) return console.warn('Month must be between 1 and 12..');
         expenses = await expenseRepo.findByMonth(month);
     } else {
         expenses = await expenseRepo.findAll();

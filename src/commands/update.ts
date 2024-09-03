@@ -4,6 +4,7 @@ export default async (options: any) => {
     const id = options.id;
     const description = options.description;
     const amount = options.amount;
+    if (!description && !amount) console.log("error: pass at least one of the following options '-d --description <description>', '-a --amount <amount>'");
     if (id && Number.isNaN(id)) return console.warn('ID value is not a valid number')
     if (amount && Number.isNaN(amount)) return console.warn('Amount value is not a valid number')
 
@@ -13,6 +14,6 @@ export default async (options: any) => {
 
     if (description) expense.description = description;
     if (amount) expense.amount = amount;
-    if (description || amount) expense.updatedAt = new Date();
+    expense.updatedAt = new Date();
     expenseRepo.save(expense);
 }

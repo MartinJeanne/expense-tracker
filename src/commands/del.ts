@@ -5,5 +5,6 @@ export default async (options: any) => {
     if (Number.isNaN(id)) return console.warn('ID value is not a valid number')
 
     const expenseRepo = new ExpenseRepository();
-    expenseRepo.deleteById(id);
+    const deleted = await expenseRepo.deleteById(id);
+    if (!deleted) console.warn(`No expense with id: ${id}`);
 }

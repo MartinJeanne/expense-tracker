@@ -47,7 +47,7 @@ export default class Subcommand {
                 SubcommandName.update,
                 'update expense description or amount',
                 [
-                    new Option('--id <id>').argParser(parseInt),
+                    new Option('--id <id>').argParser(parseInt).makeOptionMandatory(),
                     new Option('-d --description <description>'),
                     new Option('-a --amount <amount>').argParser(parseFloat)
                 ],
